@@ -155,6 +155,7 @@ class FoodController extends Controller
             "img2"=>$fileName_2,
             "img3"=>$fileName_3
         ]);
+        return $this->SuccessResponce("Successfull updated");
 
     }
 }
