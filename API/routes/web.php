@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-
+    // return "dowie";
     // $data = Country::with('regions')->first();
     
     // return Country::with('regions')->get();

@@ -12,10 +12,11 @@ class Region extends Model
     protected $guarded = ['id'];
 
     public function country(){
-        return $this->belongsTo(Country::class);
+        return $this->belongsTo(Country::class)->select(['id' , 'name' , 'location' , 'main_img']);
     }
 
+    
     public function cities(){
-        return $this->hasMany(City::class);
+        return $this->hasMany(City::class)->select(['id' , 'region_id','name' , 'location' , 'main_img']);
     }
 }

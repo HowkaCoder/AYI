@@ -16,6 +16,8 @@ class CreateCountriesTable extends Migration
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('location')->nullable(); 
+            $table->string('main_img');
             $table->softDeletes();
             $table->timestamps();
         });

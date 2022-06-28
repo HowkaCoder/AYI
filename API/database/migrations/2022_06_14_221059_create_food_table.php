@@ -15,12 +15,13 @@ class CreateFoodTable extends Migration
     {
         Schema::create('food', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdfor(\App\MOdels\Menu::class);
+            $table->foreignIdfor(\App\Models\Menu::class);
             $table->string('name');
             $table->integer('price');
             $table->string('img1')->nullable();
             $table->string('img2')->nullable();
             $table->string('img3')->nullable();
+            $table->integer('stars')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

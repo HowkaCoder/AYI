@@ -16,12 +16,9 @@ class RestaraunFactory extends Factory
         return [
             "title"=>$this->faker->name(),
             "city_id"=>rand(1,10),
-            "type"=>$this->faker->name(),
+            "rcategory_id"=>rand(1,10),
             "location"=>$this->faker->name(),
-            "describtion"=>$this->faker->text(),
-            "main_picture"=>$this->faker->name(),
-            "main_describtion"=>$this->faker->text(),
-            "phone"=>$this->faker->numerify(),
+            "describtion"=>$this->faker->text()
             
         ];
     }

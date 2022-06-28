@@ -14,8 +14,9 @@ class MenuFactory extends Factory
     public function definition()
     {
         return [
-            "restaraun_id"=>rand(1,10),
-            "name"=>$this->faker->name()
+            "name"=>$this->faker->name(),
+            "describtion"=>$this->faker->text()
+
         ];
     }
 }

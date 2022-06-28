@@ -16,7 +16,18 @@ class RestaraunController extends Controller
      */
     public function index()
     {
-        return $this->SuccessResponce(Restaraun::all());
+        $data = Restaraun::all();
+        foreach($data as $value){
+            $value->images = [
+                "img1"=>$value->img1,
+                "img2"=>$value->img2,
+                "img3"=>$value->img3
+            ];
+        }
+        $subset = $data->map(function($value){
+            return $value->only(['id' , 'city_id' , 'rcategory_id' , 'title' , 'describtion' , 'location' , 'view' , 'stars' , 'images']);
+        });
+        return $this->SuccessResponce($subset);
     }
 
     /**
@@ -29,21 +40,13 @@ class RestaraunController extends Controller
     {
         $validator = Validator::make($request->all() , [
             "title"=>"required",
-            'city_id'=>"required|exists:App\Models\City,id",
+            'city_id'=>"required|numeric|exists:App\Models\City,id",
+            "rcategory_id"=>"required|numeric|exists:App\Models\Rcategory,id",
             "describtion"=>"required",
-            "main_picture"=>"required",
-            "main_describtion"=>"required",
-            "location"=>"required",
-            "phone"=>"numeric|required",
-            "type"=>"required"
+            "location"=>"required"
         ]);
         if($validator->fails()){
             return $this->ErrorResponce($validator->errors()->first());
-        }
-        if(!empty($request->main_picture)){
-            $main_picture = time().'_'.$request->file('main_picture')->getClientOriginalName();
-            $request->file('main_picture')->storeAs('public/images/restaraun', $main_picture);
-            
         }
         if(empty($request->img1) and empty($request->img2) and empty($request->img3)){
             $request->img1 = 'error.png';
@@ -74,15 +77,11 @@ class RestaraunController extends Controller
                 "title"=>$request->title,
                 "describtion"=>$request->describtion,
                 "city_id"=>$request->city_id,
+                "rcategory_id"=>$request->rcategory_id,
                 "img1"=>$fileName_1,
                 "img2"=>$fileName_2,
                 "img3"=>$fileName_3,
-                "main_picture"=>$main_picture,
-                "main_describtion"=>$request->main_describtion,
-                "type"=>$request->type,
-                "phone"=>$request->phone,
-                'location'=>$request->location,
-                "type"=>$request->type                
+                'location'=>$request->location          
             ]);
         }
         
@@ -101,7 +100,7 @@ class RestaraunController extends Controller
      */
     public function show(Restaraun $restaraun)
     {
-        return  $this->SuccessResponce($restaraun->load('menus')->load('city'));
+        return  $this->SuccessResponce($restaraun->load('rcategory' )->load('city')->only(['id' , 'city_id' ,'title' , 'describtion' , 'location' , 'view' , 'stars' , 'city' , 'rcategory']));
     }
 
     /**
@@ -132,20 +131,12 @@ class RestaraunController extends Controller
         $validator = Validator::make($request->all() , [
             "title"=>"required",
             'city_id'=>"required|numeric|exists:App\Models\City,id",
+            "rcategory_id"=>"required|numeric|exists:App\Models\Rcategory,id",
             "describtion"=>"required",
-            "main_picture"=>"required",
-            "main_describtion"=>"required",
-            "location"=>"required",
-            "phone"=>"numeric|required",
-            "type"=>"required"
+            "location"=>"required"
         ]);
         if($validator->fails()){
             return $this->ErrorResponce($validator->errors()->first());
-        }
-        if(!empty($request->main_picture)){
-            $main_picture = time().'_'.$request->file('main_picture')->getClientOriginalName();
-            $request->file('main_picture')->storeAs('public/images/restaraun', $main_picture);
-            
         }
         if(empty($request->img1) and empty($request->img2) and empty($request->img3)){
             $request->img1 = 'error.png';
@@ -177,14 +168,11 @@ class RestaraunController extends Controller
             "title"=>$request->title,
             "describtion"=>$request->describtion,
             "city_id"=>$request->city_id,
+            "rcategory_id"=>$request->rcategory_id,
             "img1"=>$fileName_1,
             "img2"=>$fileName_2,
             "img3"=>$fileName_3,
-            "main_picture"=>$main_picture,
-            "main_describtion"=>$request->main_describtion,
-            "type"=>$request->type,
-            'location'=>$request->location,
-            "type"=>$request->type                
+            'location'=>$request->location                
         ]);
         return $this->SuccessResponce("Successfully updated!");
     }

@@ -16,8 +16,23 @@ class FoodController extends Controller
      */
     public function index()
     {
-        return $this->SuccessResponce(Food::all());
+        $data = Food::all();
+        $data->images = 0;
+        foreach($data as $value){
+            $value->images = [
+                "img1"=>$value->img1,
+                "img2"=>$value->img2,
+                "img3"=>$value->img3
+            ];
+        }
+        $subset = $data->map(function($value){
+            return $value->only(['id' , 'name' , 'price' , 'images' , 'stars']);
+        });
+       return  $this->SuccessResponce($subset);
+        
     }
+        
+    
 
     /**
      * Store a newly created resource in storage.
@@ -82,7 +97,12 @@ class FoodController extends Controller
      */
     public function show(Food $food)
     {
-        return $this->SuccessResponce($food->load('menu'));
+        $food->images = [
+            "img1"=>$food->img1,
+            "img2"=>$food->img2,
+            "img3"=>$food->img3
+        ];
+        return $this->SuccessResponce($food->load('menu')->only(['id' , 'name' , 'price' , 'stars', 'images' , 'menu']));
     }
 
     /**
@@ -155,7 +175,8 @@ class FoodController extends Controller
             "img2"=>$fileName_2,
             "img3"=>$fileName_3
         ]);
-        return $this->SuccessResponce("Successfull updated");
+        return
+         $this->SuccessResponce("Successfull updated");
 
     }
 }

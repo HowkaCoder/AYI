@@ -15,7 +15,12 @@ class MenuController extends Controller
      */
     public function index()
     {
-       return  $this->SuccessResponce(Menu::all());
+        $data = Menu::all();
+        
+        $subset = $data->map(function($value){
+            return $value->only(['id' , 'name' , 'describtion']);
+        });
+       return  $this->SuccessResponce($subset);
     }
 
     /**
@@ -26,7 +31,7 @@ class MenuController extends Controller
      */
     public function store(MenuRequest $request)
     {
-        Menu::create($request->only(["restaraun_id" , "name"]));
+        Menu::create($request->only(["name" , "describtion"]));
 
         return $this->SuccessResponce("Successfully created!");
     }
@@ -39,7 +44,7 @@ class MenuController extends Controller
      */
     public function show(Menu $menu)
     {
-        return $this->SuccessResponce($menu->load('foods')->load('restaraun'));
+        return $this->SuccessResponce($menu->load('foods')->only(['id' , 'name' , 'describtion' , 'foods']));
     }
 
     /**
@@ -51,7 +56,7 @@ class MenuController extends Controller
      */
     public function update(MenuRequest $request, Menu $menu)
     {
-        $menu->update($request->only(['restaraun_id' , "name"]));
+        $menu->update($request->only(['describtion' , "name"]));
         
         return $this->SuccessResponce("Successfully updated!");
     }

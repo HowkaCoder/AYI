@@ -24,8 +24,8 @@ class MenuRequest extends FormRequest
     public function rules()
     {
         return [
-            "restaraun_id"=>"required|numeric|exists:App\Models\Restaraun,id",
-            "name"=>"required"
+            "name"=>"required",
+            "describtion"=>"required"
         ];
     }
 }

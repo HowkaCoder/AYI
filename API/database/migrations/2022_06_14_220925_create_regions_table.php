@@ -17,6 +17,8 @@ class CreateRegionsTable extends Migration
             $table->id();
             $table->foreignIdFor(App\Models\Country::class);
             $table->string('name');
+            $table->string('location')->nullable();
+            $table->string('main_img');
             $table->softDeletes();
             $table->timestamps();
         });

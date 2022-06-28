@@ -12,6 +12,6 @@ class Food extends Model
     protected $guarded = ['id'];
 
     public function menu(){
-        return $this->belongsTo(Menu::class);
+        return $this->belongsTo(Menu::class)->select(['id' , 'name' , 'describtion']);
     }
 }

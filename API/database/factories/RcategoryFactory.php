@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CountryFactory extends Factory
+class RcategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -15,8 +15,7 @@ class CountryFactory extends Factory
     {
         return [
             "name"=>$this->faker->name(),
-            "location"=>$this->faker->text(),
-            "main_img"=>$this->faker->numerify()
+            "describtion"=>$this->faker->text()
         ];
     }
 }

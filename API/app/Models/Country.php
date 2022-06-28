@@ -12,7 +12,7 @@ class Country extends Model
     protected $guarded = ['id'];
 
     public function regions(){
-        return $this->hasMany(Region::class);
+        return $this->hasMany(Region::class)->select(['id' , 'country_id','name' , 'location' , 'main_img']);
     }
 
 

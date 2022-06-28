@@ -15,7 +15,9 @@ class RegionFactory extends Factory
     {
         return [
             "country_id"=>rand(1,10),
-            "name"=>$this->faker->name()
+            "name"=>$this->faker->name() ,
+            "location"=>$this->faker->text(),
+            "main_img"=>$this->faker->numerify()
         ];
     }
 }

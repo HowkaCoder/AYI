@@ -15,6 +15,6 @@ class Menu extends Model
         return $this->belongsTo(Restaraun::class);
     }
     public function foods(){
-        return $this->hasMany(Food::class);
+        return $this->hasMany(Food::class)->select('id' , 'menu_id' , 'name' , 'price', 'stars' , 'img1' , 'img2' , 'img3');
     }
 }

@@ -15,8 +15,8 @@ class CreateMenusTable extends Migration
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\MOdels\Restaraun::class);
             $table->string('name');
+            $table->text('describtion');
             $table->softDeletes();
             $table->timestamps();
         });

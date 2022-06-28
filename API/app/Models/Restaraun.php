@@ -12,9 +12,13 @@ class Restaraun extends Model
     protected $guarded = ['id'];
 
     public function city(){
-        return $this->belongsTo(City::class);
+        return $this->belongsTo(City::class)->select(['id' , 'name' , 'region_id' , 'location' , 'main_img']);
     }
     public function menus(){
         return $this->hasMany(Menu::class);
     }
+    public function rcategory(){
+        return $this->belongsTo(Rcategory::class)->select(['id' , 'name' , 'describtion']);
+    }
 }
+ 
