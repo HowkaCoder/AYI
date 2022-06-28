@@ -43,6 +43,7 @@ class CountryController extends Controller
         
         if(!empty($request->main_img)){
             $main_img = time().'_'.$request->file('main_img')->getClientOriginalName();
+            // $this->img_compress($main_img);
             $request->file('main_img')->storeAs('public/images/restaraun', $main_img);
             
         } else{

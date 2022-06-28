@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    return view('index_ru');
     // return "dowie";
     // $data = Country::with('regions')->first();
     
@@ -31,4 +32,8 @@ Route::get('/', function () {
     
     // return new CountryCollection(Country::all());
 
-});
+})->name('ru');
+
+Route::get('/en' , function(){
+    return view('index_en');
+})->name('en');

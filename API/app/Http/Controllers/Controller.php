@@ -21,4 +21,28 @@ class Controller extends BaseController
         
         return response($data , $code);
     }
+
+    // public function img_compress($img){
+
+    //     $ImagickSrc = new Imagick($img);
+    //     $compressionList = [Imagick::COMPRESSION_JPEG2000];
+        
+    //     $imagicDts = new Imagick();
+    //     $imagicDts->setCompression(70);
+    //     $imagicDts->setCompressionQuality(70);
+    //     $imagicDts->newPseudoImage(
+    //             $ImagickSrc->getImageWidth(),
+    //             $ImagickSrc->getImageHeight(),
+    //             "canvas:white"
+    //     );
+    //     $imagicDts->compositeImage(
+    //         $ImagickSrc,
+    //         Imagick::COMPOSITE_ATOP,
+    //         0,
+    //         0
+    //     );
+    //     $imagicDts->setImageFormat("jpg");
+    //     $imagicDts->writeImage($img);
+
+    // }
 }
